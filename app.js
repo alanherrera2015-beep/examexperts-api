@@ -1,16 +1,12 @@
-// ExamExperts Frontend Application
+// ExamExperts Frontend Application (login + redirect to dashboard)
 (function() {
   'use strict';
 
-  // API Configuration
-  // User requested the hosted API origin be kept. Using explicit hosted origin:
+  // API Configuration - uses hosted API origin
   const API_BASE = 'https://examexperts-api.onrender.com';
 
-  // Helper function to make API requests
-  // endpoint should be like '/login', '/signup', '/health'
   async function apiRequest(endpoint, options = {}) {
     const url = `${API_BASE}/api${endpoint}`;
-
     const config = {
       method: options.method || 'GET',
       headers: {
@@ -20,53 +16,38 @@
       ...(options.body ? { body: JSON.stringify(options.body) } : {})
     };
 
-    // Debug log
     console.log('API Request:', url, config);
 
     const response = await fetch(url, config);
     let data = {};
-    try {
-      data = await response.json();
-    } catch (e) {
-      console.warn('Response is not JSON', e);
-    }
+    try { data = await response.json(); } catch (e) { /* non-JSON response */ }
 
     if (!response.ok) {
-      // Attach status for easier debugging
       const err = new Error(data.error || 'Request failed');
       err.status = response.status;
       err.raw = data;
       throw err;
     }
-
     return data;
   }
 
-  // Display message in the auth form container
   function showMessage(message, type = 'info') {
     const container = document.getElementById('auth-form-container');
     if (!container) return;
-
-    // Remove any existing messages
-    const existingMessages = container.querySelectorAll('.message');
-    existingMessages.forEach(msg => msg.remove());
-
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `message ${type}`;
-    msgDiv.textContent = message;
-    container.insertBefore(msgDiv, container.firstChild);
+    const existing = container.querySelectorAll('.message');
+    existing.forEach(e => e.remove());
+    const div = document.createElement('div');
+    div.className = `message ${type}`;
+    div.textContent = message;
+    container.insertBefore(div, container.firstChild);
   }
 
-  // Handle login form submission
   async function handleLogin(event) {
     event.preventDefault();
-
     const form = event.target;
+    const email = (form.querySelector('#email') || {}).value || '';
+    const password = (form.querySelector('#password') || {}).value || '';
     const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('button');
-    const emailEl = form.querySelector('#email') || document.getElementById('email');
-    const passwordEl = form.querySelector('#password') || document.getElementById('password');
-    const email = emailEl ? emailEl.value.trim() : '';
-    const password = passwordEl ? passwordEl.value : '';
 
     if (!email || !password) {
       showMessage('Please enter both email and password', 'error');
@@ -74,10 +55,7 @@
     }
 
     try {
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Signing in...';
-      }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Signing in...'; }
 
       const result = await apiRequest('/login', {
         method: 'POST',
@@ -85,29 +63,23 @@
       });
 
       if (result.success) {
-        // Store token and user info
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));
-
         showMessage(`Welcome back, ${result.user.name}!`, 'success');
 
-        // Redirect to dashboard (placeholder)
+        // redirect to the platform page
         setTimeout(() => {
-          showMessage('Login successful! Dashboard would load here.', 'success');
-        }, 1500);
+          window.location.href = '/dashboard.html';
+        }, 600);
       }
-    } catch (error) {
-      console.warn('Login error:', error);
-      showMessage(error.message || 'Login failed', 'error');
+    } catch (err) {
+      console.warn('Login error:', err);
+      showMessage(err.message || 'Login failed', 'error');
     } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Sign In';
-      }
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Sign In'; }
     }
   }
 
-  // Check API health on load
   async function checkApiHealth() {
     try {
       const health = await apiRequest('/health');
@@ -119,67 +91,36 @@
     }
   }
 
-  // Initialize application
-  async function init() {
-    // Check if already logged in
+  function init() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-
     if (token && user) {
       try {
-        const userData = JSON.parse(user);
-        showMessage(`Already logged in as ${userData.name}`, 'success');
+        const u = JSON.parse(user);
+        showMessage(`Already logged in as ${u.name}`, 'success');
       } catch (e) {
-        // Invalid user data, clear storage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
       }
     }
 
-    // Attach login form handler
     const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-      loginForm.addEventListener('submit', handleLogin);
-    } else {
-      // If form id differs, try to attach to any form in auth container
-      const authContainerForm = document.querySelector('#auth-form-container form');
-      if (authContainerForm) authContainerForm.addEventListener('submit', handleLogin);
-    }
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
-    // Check API health
-    const apiHealthy = await checkApiHealth();
-    if (!apiHealthy) {
-      showMessage('Warning: API may be unavailable', 'error');
-    }
+    checkApiHealth().then(ok => {
+      if (!ok) showMessage('Warning: API may be unavailable', 'error');
+    });
   }
 
-  // Initialize when DOM is ready
-  window.addEventListener('DOMContentLoaded', function() {
-    try {
-      init();
-    } catch (error) {
-      const msg = typeof error === 'string' ? error : (error && error.message ? error.message : String(error));
-      console.warn('Initialization error:', msg);
-
-      // Use logInitializationError if available, otherwise fallback to manual insertion
-      // Note: The fallback code intentionally duplicates debug.js styling to work independently
-      if (typeof logInitializationError === 'function') {
-        logInitializationError(msg);
-      } else {
-        // Fallback when debug.js is not loaded: insert error node into auth form container
-        const authContainer = document.getElementById('auth-form-container');
-        if (authContainer) {
-          const errNode = document.createElement('div');
-          errNode.style.marginTop = '12px';
-          errNode.style.padding = '12px';
-          errNode.style.borderRadius = '8px';
-          errNode.style.background = 'rgba(192,21,47,0.06)';
-          errNode.style.color = '#c0152f';
-          errNode.style.fontSize = '13px';
-          errNode.textContent = 'Initialization error: ' + msg;
-          authContainer.insertBefore(errNode, container.firstChild);
-        }
+  window.addEventListener('DOMContentLoaded', () => {
+    try { init(); } catch (e) {
+      const container = document.getElementById('auth-form-container');
+      if (container) {
+        const errNode = document.createElement('div');
+        errNode.textContent = `Initialization error: ${e && e.message ? e.message : String(e)}`;
+        container.insertBefore(errNode, container.firstChild);
       }
+      console.warn(e);
     }
   });
 })();
