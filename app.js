@@ -136,10 +136,11 @@
       console.warn('Initialization error:', msg);
 
       // Use logInitializationError if available, otherwise fallback to manual insertion
+      // Note: The fallback code intentionally duplicates debug.js styling to work independently
       if (typeof logInitializationError === 'function') {
         logInitializationError(msg);
       } else {
-        // Fallback: insert error node into auth form container
+        // Fallback when debug.js is not loaded: insert error node into auth form container
         const authContainer = document.getElementById('auth-form-container');
         if (authContainer) {
           const errNode = document.createElement('div');
