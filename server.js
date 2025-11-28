@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 // Demo users database (replace with real database later)
+// NOTE: passwords will be hashed at startup so we can compare safely
 const users = [
   {
     id: 1,
@@ -106,6 +107,19 @@ function verifyToken(req, res, next) {
   }
 }
 
+// Hash initial demo users' passwords at startup
+function hashInitialPasswords() {
+  registeredUsers = registeredUsers.map(u => {
+    // If password already looks hashed (starts with $2a$ or $2y$), skip
+    if (typeof u.password === 'string' && (u.password.startsWith('$2a$') || u.password.startsWith('$2y$'))) {
+      return u;
+    }
+    const hashed = bcryptjs.hashSync(u.password, 10);
+    return { ...u, password: hashed };
+  });
+}
+hashInitialPasswords();
+
 // ===== API ENDPOINTS =====
 
 // Health check
@@ -118,7 +132,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // LOGIN ENDPOINT
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
@@ -127,17 +141,23 @@ app.post('/api/login', (req, res) => {
       return res.status(400).json({ error: 'Email and password required' });
     }
     
-    // Find user
-    const user = registeredUsers.find(u => u.email === email && u.password === password);
+    // Find user by email
+    const user = registeredUsers.find(u => u.email === email);
     
     if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    // Compare password using bcrypt
+    const match = await bcryptjs.compare(password, user.password);
+    if (!match) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
     
     // Generate token
     const token = generateToken(user.id, user.email, user.role);
     
-    // Return user data and token
+    // Return user data and token (omit password)
     res.json({
       success: true,
       message: 'Login successful',
@@ -156,7 +176,7 @@ app.post('/api/login', (req, res) => {
 });
 
 // SIGNUP ENDPOINT
-app.post('/api/signup', (req, res) => {
+app.post('/api/signup', async (req, res) => {
   try {
     const { email, password, passwordConfirm, name, role } = req.body;
     
@@ -186,11 +206,14 @@ app.post('/api/signup', (req, res) => {
       return res.status(400).json({ error: 'Email already registered' });
     }
     
+    // Hash the password before storing
+    const hashedPassword = await bcryptjs.hash(password, 10);
+
     // Create new user
     const newUser = {
       id: registeredUsers.length + 1,
       email,
-      password, // In production, hash this!
+      password: hashedPassword,
       name,
       role: role || 'Tutor',
       certProgress: 0,
@@ -300,7 +323,7 @@ app.put('/api/user/profile', verifyToken, (req, res) => {
 });
 
 // CHANGE PASSWORD (requires auth)
-app.post('/api/user/change-password', verifyToken, (req, res) => {
+app.post('/api/user/change-password', verifyToken, async (req, res) => {
   try {
     const { currentPassword, newPassword, confirmPassword } = req.body;
     const user = registeredUsers.find(u => u.id === req.user.userId);
@@ -309,7 +332,9 @@ app.post('/api/user/change-password', verifyToken, (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    if (user.password !== currentPassword) {
+    // Compare current password
+    const match = await bcryptjs.compare(currentPassword, user.password);
+    if (!match) {
       return res.status(401).json({ error: 'Current password is incorrect' });
     }
     
@@ -325,7 +350,8 @@ app.post('/api/user/change-password', verifyToken, (req, res) => {
       });
     }
     
-    user.password = newPassword;
+    // Hash and set new password
+    user.password = await bcryptjs.hash(newPassword, 10);
     
     res.json({
       success: true,
