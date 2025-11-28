@@ -3,17 +3,21 @@
   'use strict';
 
   // API Configuration
-  const API_BASE = window.location.origin;
+  const API_BASE = 'https://examexperts-api.onrender.com';
+  // or: const API_BASE = 'https://api.examexperts.org';
 
   // Helper function to make API requests
+  // endpoint should be like '/login', '/signup', '/health'
   async function apiRequest(endpoint, options = {}) {
     const url = `${API_BASE}/api${endpoint}`;
+
     const config = {
+      method: options.method || 'GET',
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers
+        ...(options.headers || {})
       },
-      ...options
+      ...(options.body ? { body: JSON.stringify(options.body) } : {})
     };
 
     const response = await fetch(url, config);
@@ -46,9 +50,11 @@
     event.preventDefault();
 
     const form = event.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const email = form.querySelector('#email').value.trim();
-    const password = form.querySelector('#password').value;
+    const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+    const emailEl = form.querySelector('#email') || document.getElementById('email');
+    const passwordEl = form.querySelector('#password') || document.getElementById('password');
+    const email = emailEl ? emailEl.value.trim() : '';
+    const password = passwordEl ? passwordEl.value : '';
 
     if (!email || !password) {
       showMessage('Please enter both email and password', 'error');
@@ -56,12 +62,14 @@
     }
 
     try {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Signing in...';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Signing in...';
+      }
 
       const result = await apiRequest('/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password })
+        body: { email, password }
       });
 
       if (result.success) {
@@ -80,8 +88,10 @@
       console.warn('Login error:', error);
       showMessage(error.message || 'Login failed', 'error');
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Sign In';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In';
+      }
     }
   }
 
@@ -118,6 +128,10 @@
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
       loginForm.addEventListener('submit', handleLogin);
+    } else {
+      // If form id differs, try to attach to any form in auth container
+      const authContainerForm = document.querySelector('#auth-form-container form');
+      if (authContainerForm) authContainerForm.addEventListener('submit', handleLogin);
     }
 
     // Check API health
