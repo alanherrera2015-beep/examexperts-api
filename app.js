@@ -3,8 +3,8 @@
   'use strict';
 
   // API Configuration
+  // User requested the hosted API origin be kept. Using explicit hosted origin:
   const API_BASE = 'https://examexperts-api.onrender.com';
-  // or: const API_BASE = 'https://api.examexperts.org';
 
   // Helper function to make API requests
   // endpoint should be like '/login', '/signup', '/health'
@@ -20,11 +20,23 @@
       ...(options.body ? { body: JSON.stringify(options.body) } : {})
     };
 
+    // Debug log
+    console.log('API Request:', url, config);
+
     const response = await fetch(url, config);
-    const data = await response.json();
+    let data = {};
+    try {
+      data = await response.json();
+    } catch (e) {
+      console.warn('Response is not JSON', e);
+    }
 
     if (!response.ok) {
-      throw new Error(data.error || 'Request failed');
+      // Attach status for easier debugging
+      const err = new Error(data.error || 'Request failed');
+      err.status = response.status;
+      err.raw = data;
+      throw err;
     }
 
     return data;
@@ -165,7 +177,7 @@
           errNode.style.color = '#c0152f';
           errNode.style.fontSize = '13px';
           errNode.textContent = 'Initialization error: ' + msg;
-          authContainer.insertBefore(errNode, authContainer.firstChild);
+          authContainer.insertBefore(errNode, container.firstChild);
         }
       }
     }
