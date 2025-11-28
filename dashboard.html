@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolTutor Hub - Tutoring &amp; Exam Prep Management</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-md); }
+
+p {
+  margin: 0 0 var(--space-16) 0;
+}
+
+/* App-specific styles */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-16) var(--space-24);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-radius: var(--radius-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.school-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.school-district {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.role-selector {
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+@media (prefers-color-scheme: dark) {
+  .role-selector {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+.nav-tabs {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-16) var(--space-24);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.nav-tab {
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.nav-tab.active {
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--space-24);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-24);
+}
+
+.stat-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+}
+
+.stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.stat-change {
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-8);
+}
+
+.stat-change.positive {
+  color: var(--color-success);
+}
+
+.section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  margin-bottom: var(--space-24);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-20);
+}
+
+.section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+  gap: var(--space-8);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn-sm {
+  padding: var(--space-6) var(--space-12);
+  font-size: var(--font-size-sm);
+}
+
+.filters {
+  display: flex;
+  gap: var(--space-12);
+  margin-bottom: var(--space-20);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.filter-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.filter-select,
+.filter-input {
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  min-width: 150px;
+}
+
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+@media (prefers-color-scheme: dark) {
+  .filter-select {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--color-bg-1);
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  text-align: left;
+  padding: var(--space-12) var(--space-16);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+td {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+  font-size: var(--font-size-sm);
+}
+
+tbody tr:hover {
+  background-color: var(--color-bg-2);
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.risk-low {
+  background-color: rgba(var(--color-success-rgb), 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.25);
+}
+
+.risk-medium {
+  background-color: rgba(var(--color-warning-rgb), 0.15);
+  color: var(--color-warning);
+  border: 1px solid rgba(var(--color-warning-rgb), 0.25);
+}
+
+.risk-high {
+  background-color: rgba(var(--color-error-rgb), 0.15);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb), 0.25);
+}
+
+.progress-bar {
+  width: 100px;
+  height: 8px;
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width 1s var(--ease-standard);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-32);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-24);
+}
+
+.modal-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+}
+
+.close-btn:hover {
+  background-color: var(--color-secondary);
+}
+
+.form-group {
+  margin-bottom: var(--space-20);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+}
+
+.form-control:focus {
+  outline: var(--focus-outline);
+  border-color: var(--color-primary);
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+@media (prefers-color-scheme: dark) {
+  select.form-control {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--space-12);
+  justify-content: flex-end;
+  margin-top: var(--space-24);
+}
+
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.session-item {
+  padding: var(--space-16);
+  border: 1px solid var(--color-card-border-inner);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.session-item:hover {
+  background-color: var(--color-bg-3);
+  border-color: var(--color-primary);
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: var(--space-8);
+}
+
+.session-info {
+  flex: 1;
+}
+
+.session-student {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.session-tutor {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.session-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.session-details {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-8);
+}
+
+.understanding-indicator {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.understanding-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+}
+
+.understanding-dot.filled {
+  background-color: var(--color-primary);
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-16);
+}
+
+.module-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.module-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.module-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-8);
+  color: var(--color-text);
+}
+
+.module-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-16);
+}
+
+.module-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-16);
+}
+
+.welcome-banner {
+  background: linear-gradient(135deg, var(--color-bg-1) 0%, var(--color-bg-3) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-32);
+  margin-bottom: var(--space-24);
+  border: 1px solid var(--color-card-border);
+}
+
+.welcome-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-8);
+}
+
+.welcome-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+.alert {
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-16);
+  border: 1px solid;
+}
+
+.alert-success {
+  background-color: rgba(var(--color-success-rgb), 0.1);
+  border-color: rgba(var(--color-success-rgb), 0.3);
+  color: var(--color-success);
+}
+
+.alert-info {
+  background-color: var(--color-bg-1);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.tutor-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-16);
+  border: 1px solid var(--color-card-border-inner);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-12);
+}
+
+.tutor-info {
+  flex: 1;
+}
+
+.tutor-name {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-4);
+}
+
+.tutor-subject {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.tutor-stats {
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.rating-scale {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.rating-option {
+  flex: 1;
+  padding: var(--space-12);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-base);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  background-color: var(--color-surface);
+}
+
+.rating-option:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-bg-1);
+}
+
+.rating-option.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.rating-number {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  display: block;
+}
+
+.rating-label {
+  font-size: var(--font-size-xs);
+  margin-top: var(--space-4);
+  display: block;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-32);
+  color: var(--color-text-secondary);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-select,
+  .filter-input {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .table-container {
+    overflow-x: scroll;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: start;
+    gap: var(--space-12);
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
+</head>
+<body>
+  <!-- Authentication guard + Logout button injection -->
+  <script>
+    (function() {
+      const API_BASE = 'https://examexperts-api.onrender.com';
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // No token -> go to login
+        window.location.href = '/';
+        return;
+      }
+
+      // Optionally verify token server-side quickly (not blocking UX)
+      // fetch(`${API_BASE}/api/user/profile`, { headers: { 'Authorization': `Bearer ${token}` } })
+      //   .then(r => { if (r.status === 401) { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/'; } })
+      //   .catch(()=>{});
+
+      // Add logout button to the header once DOM is available
+      window.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('.header');
+        if (!header) return;
+        // Add a container if not present
+        let rightContainer = header.querySelector('.header-right');
+        if (!rightContainer) {
+          rightContainer = document.createElement('div');
+          rightContainer.className = 'header-right';
+          header.appendChild(rightContainer);
+        }
+        // Create Logout button if not present
+        if (!document.getElementById('logoutBtn')) {
+          const logoutBtn = document.createElement('button');
+          logoutBtn.id = 'logoutBtn';
+          logoutBtn.className = 'btn btn-secondary';
+          logoutBtn.style.marginLeft = '12px';
+          logoutBtn.textContent = 'Logout';
+          rightContainer.appendChild(logoutBtn);
+
+          logoutBtn.addEventListener('click', () => {
+            // Optional: call API logout endpoint
+            fetch(`${API_BASE}/api/logout`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              }
+            }).catch(()=>{});
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/';
+          });
+        }
+
+        // Personalize role selector based on stored user if present
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          try {
+            const u = JSON.parse(storedUser);
+            // Map backend roles to selector values if necessary
+            const roleSelector = document.getElementById('roleSelector');
+            if (roleSelector) {
+              const roleMap = { 'Admin': 'admin', 'Manager': 'admin', 'Tutor': 'tutor', 'Teacher': 'teacher', 'Student': 'student' };
+              const sel = roleMap[u.role] || 'admin';
+              roleSelector.value = sel;
+            }
+          } catch (e) {
+            // ignore parse errors
+          }
+        }
+      });
+    })();
+  </script>
+
+    <div class="app-container" id="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">LHS</div>
+                    <div>
+                        <div class="school-name">Lincoln High School</div>
+                        <div class="school-district">Houston ISD</div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <select class="role-selector" id="roleSelector">
+                    <option value="admin">Admin Dashboard</option>
+                    <option value="teacher">Teacher View</option>
+                    <option value="tutor">Tutor View</option>
+                    <option value="student">Student Portal</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs" id="navTabs"></div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent"></div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="addStudentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Student</h3>
+                <button class="close-btn" onclick="closeModal('addStudentModal')">&times;</button>
+            </div>
+            <form id="addStudentForm" onsubmit="handleAddStudent(event)">
+                <div class="form-group">
+                    <label class="form-label">Student Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Grade Level</label>
+                    <select class="form-control" name="grade" required>
+                        <option value="9">9th Grade</option>
+                        <option value="10">10th Grade</option>
+                        <option value="11">11th Grade</option>
+                        <option value="12">12th Grade</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Risk Level</label>
+                    <select class="form-control" name="risk_level" required>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Program</label>
+                    <select class="form-control" name="program" required>
+                        <option value="RTI - Math">RTI - Math</option>
+                        <option value="RTI - Reading">RTI - Reading</option>
+                        <option value="Credit Recovery">Credit Recovery</option>
+                        <option value="AP Chemistry Prep">AP Chemistry Prep</option>
+                        <option value="AP Statistics">AP Statistics</option>
+                        <option value="SAT Prep">SAT Prep</option>
+                        <option value="ACT Prep">ACT Prep</option>
+                        <option value="Reading Intervention">Reading Intervention</option>
+                        <option value="Exam Prep Lab">Exam Prep Lab</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current GPA</label>
+                    <input type="number" step="0.1" min="0" max="4" class="form-control" name="gpa" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addStudentModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addTutorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Tutor</h3>
+                <button class="close-btn" onclick="closeModal('addTutorModal')">&times;</button>
+            </div>
+            <form id="addTutorForm" onsubmit="handleAddTutor(event)">
+                <div class="form-group">
+                    <label class="form-label">Tutor Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subject Area</label>
+                    <input type="text" class="form-control" name="subject" placeholder="e.g., Mathematics, Chemistry" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addTutorModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Tutor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="logSessionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Log Tutoring Session</h3>
+                <button class="close-btn" onclick="closeModal('logSessionModal')">&times;</button>
+            </div>
+            <form id="logSessionForm" onsubmit="handleLogSession(event)">
+                <div class="form-group">
+                    <label class="form-label">Student</label>
+                    <select class="form-control" name="student" id="sessionStudentSelect" required>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Session Date</label>
+                    <input type="date" class="form-control" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Duration (minutes)</label>
+                    <input type="number" class="form-control" name="duration" min="15" step="5" value="60" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Topic Covered</label>
+                    <select class="form-control" name="topic" required>
+                        <option value="AP Chemistry - Equilibrium">AP Chemistry - Equilibrium</option>
+                        <option value="AP Chemistry - Kinetics">AP Chemistry - Kinetics</option>
+                        <option value="Algebra II - Functions">Algebra II - Functions</option>
+                        <option value="Algebra II - Polynomials">Algebra II - Polynomials</option>
+                        <option value="Statistics - Distributions">Statistics - Distributions</option>
+                        <option value="SAT Reading">SAT Reading</option>
+                        <option value="SAT Math">SAT Math</option>
+                        <option value="General Tutoring">General Tutoring</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Student Understanding Level (1-5)</label>
+                    <div class="rating-scale" id="understandingRating">
+                        <div class="rating-option" data-value="1">
+                            <span class="rating-number">1</span>
+                            <span class="rating-label">Poor</span>
+                        </div>
+                        <div class="rating-option" data-value="2">
+                            <span class="rating-number">2</span>
+                            <span class="rating-label">Fair</span>
+                        </div>
+                        <div class="rating-option" data-value="3">
+                            <span class="rating-number">3</span>
+                            <span class="rating-label">Good</span>
+                        </div>
+                        <div class="rating-option" data-value="4">
+                            <span class="rating-number">4</span>
+                            <span class="rating-label">Very Good</span>
+                        </div>
+                        <div class="rating-option" data-value="5">
+                            <span class="rating-number">5</span>
+                            <span class="rating-label">Excellent</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="understanding_level" id="understandingLevelInput" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Key Focus Areas</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="focus1" name="focus" value="Problem Solving">
+                            <label for="focus1">Problem Solving</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="focus2" name="focus" value="Concept Review">
+                            <label for="focus2">Concept Review</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="focus3" name="focus" value="Test Prep">
+                            <label for="focus3">Test Prep</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="focus4" name="focus" value="Homework Help">
+                            <label for="focus4">Homework Help</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Session Notes</label>
+                    <textarea class="form-control" name="notes" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Attendance</label>
+                    <select class="form-control" name="attendance" required>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Late">Late</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('logSessionModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Log Session</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editStudentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Student</h3>
+                <button class="close-btn" onclick="closeModal('editStudentModal')">&times;</button>
+            </div>
+            <form id="editStudentForm" onsubmit="handleEditStudent(event)">
+                <input type="hidden" name="id" id="editStudentId">
+                <div class="form-group">
+                    <label class="form-label">Student Name</label>
+                    <input type="text" class="form-control" name="name" id="editStudentName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Grade Level</label>
+                    <select class="form-control" name="grade" id="editStudentGrade" required>
+                        <option value="9">9th Grade</option>
+                        <option value="10">10th Grade</option>
+                        <option value="11">11th Grade</option>
+                        <option value="12">12th Grade</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Risk Level</label>
+                    <select class="form-control" name="risk_level" id="editStudentRisk" required>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Program</label>
+                    <select class="form-control" name="program" id="editStudentProgram" required>
+                        <option value="RTI - Math">RTI - Math</option>
+                        <option value="RTI - Reading">RTI - Reading</option>
+                        <option value="Credit Recovery">Credit Recovery</option>
+                        <option value="AP Chemistry Prep">AP Chemistry Prep</option>
+                        <option value="AP Statistics">AP Statistics</option>
+                        <option value="SAT Prep">SAT Prep</option>
+                        <option value="ACT Prep">ACT Prep</option>
+                        <option value="Reading Intervention">Reading Intervention</option>
+                        <option value="Exam Prep Lab">Exam Prep Lab</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current GPA</label>
+                    <input type="number" step="0.1" min="0" max="4" class="form-control" name="gpa" id="editStudentGPA" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editStudentModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Data Store
+        let appData = {
+            school: {
+                id: 1,
+                name: "Lincoln High School",
+                district: "Houston ISD",
+                color: "#218084",
+                logo: "LHS"
+            },
+            students: [
+                { id: 1, name: "Emma Rodriguez", grade: 11, risk_level: "High", program: "AP Chemistry Prep", gpa: 3.2, sessions_this_month: 4, progress: 35 },
+                { id: 2, name: "Marcus Johnson", grade: 10, risk_level: "Medium", program: "SAT Prep", gpa: 3.5, sessions_this_month: 6, progress: 52 },
+                { id: 3, name: "Sarah Chen", grade: 11, risk_level: "Low", program: "Credit Recovery", gpa: 3.8, sessions_this_month: 2, progress: 78 },
+                { id: 4, name: "James Williams", grade: 9, risk_level: "High", program: "RTI - Math", gpa: 2.8, sessions_this_month: 8, progress: 42 },
+                { id: 5, name: "Olivia Lee", grade: 10, risk_level: "Medium", program: "AP Statistics", gpa: 3.3, sessions_this_month: 5, progress: 48 },
+                { id: 6, name: "David Martinez", grade: 11, risk_level: "Low", program: "Exam Prep Lab", gpa: 3.9, sessions_this_month: 3, progress: 85 },
+                { id: 7, name: "Ava Thompson", grade: 10, risk_level: "High", program: "Reading Intervention", gpa: 2.9, sessions_this_month: 7, progress: 38 },
+                { id: 8, name: "Ethan Brown", grade: 9, risk_level: "Low", program: "SAT Prep", gpa: 3.7, sessions_this_month: 2, progress: 65 }
+            ],
+            tutors: [
+                { id: 1, name: "Dr. Sarah Allen", subject: "Chemistry", students_assigned: 2, hours_this_month: 12 },
+                { id: 2, name: "Mr. Robert Kim", subject: "Mathematics", students_assigned: 3, hours_this_month: 18 },
+                { id: 3, name: "Ms. Jennifer Lopez", subject: "Reading/SAT Prep", students_assigned: 2, hours_this_month: 10 }
+            ],
+            sessions: [
+                { id: 1, tutor: "Dr. Sarah Allen", student: "Emma Rodriguez", date: "2025-11-27", duration: 60, topic: "Equilibrium & Le Chatelier", understanding_level: 3, notes: "Good grasp of forward/reverse reactions. Needs practice with calculations." },
+                { id: 2, tutor: "Mr. Robert Kim", student: "Marcus Johnson", date: "2025-11-26", duration: 45, topic: "SAT Math - Functions", understanding_level: 4, notes: "Strong performance. Ready to move to harder problem sets." },
+                { id: 3, tutor: "Ms. Jennifer Lopez", student: "Ava Thompson", date: "2025-11-25", duration: 60, topic: "Reading Comprehension Strategies", understanding_level: 2, notes: "Struggling with inference questions. Will focus on annotation techniques next session." },
+                { id: 4, tutor: "Mr. Robert Kim", student: "James Williams", date: "2025-11-24", duration: 50, topic: "Algebra II - Polynomials", understanding_level: 3, notes: "Making progress. Needs reinforcement on factoring techniques." },
+                { id: 5, tutor: "Dr. Sarah Allen", student: "Olivia Lee", date: "2025-11-23", duration: 55, topic: "Statistics - Distributions", understanding_level: 4, notes: "Excellent understanding of normal distribution. Ready for confidence intervals." }
+            ],
+            currentRole: 'admin',
+            currentTab: 'dashboard',
+            filters: {
+                riskLevel: 'all',
+                program: 'all',
+                grade: 'all'
+            }
+        };
+
+        let nextStudentId = 9;
+        let nextTutorId = 4;
+        let nextSessionId = 6;
+
+        // Utility Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            const form = document.querySelector(`#${modalId} form`);
+            if (form) form.reset();
+        }
+
+        function getRiskBadgeClass(risk) {
+            return `risk-badge risk-${risk.toLowerCase()}`;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // Render Functions
+        function renderAdminDashboard() {
+            const stats = calculateStats();
+            return `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Active Students</div>
+                        <div class="stat-value">${stats.totalStudents}</div>
+                        <div class="stat-change positive">+2 this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Tutoring Hours (This Month)</div>
+                        <div class="stat-value">${stats.totalHours}</div>
+                        <div class="stat-change positive">+12% vs last month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">RTI Completion Rate</div>
+                        <div class="stat-value">${stats.completionRate}%</div>
+                        <div class="stat-change positive">+5% improvement</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Grade Improvement</div>
+                        <div class="stat-value">+${stats.gradeImprovement}</div>
+                        <div class="stat-change positive">Across all programs</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Student Roster</h2>
+                        <button class="btn btn-primary" onclick="openModal('addStudentModal')">+ Add Student</button>
+                    </div>
+                    ${renderFilters()}
+                    ${renderStudentTable()}
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Sessions</h2>
+                        <button class="btn btn-primary" onclick="openModal('logSessionModal')">+ Log Session</button>
+                    </div>
+                    ${renderSessionList()}
+                </div>
+            `;
+        }
+
+        function renderFilters() {
+            return `
+                <div class="filters">
+                    <div class="filter-group">
+                        <label class="filter-label">Risk Level</label>
+                        <select class="filter-select" onchange="updateFilter('riskLevel', this.value)">
+                            <option value="all">All Levels</option>
+                            <option value="High">High Risk</option>
+                            <option value="Medium">Medium Risk</option>
+                            <option value="Low">Low Risk</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Program</label>
+                        <select class="filter-select" onchange="updateFilter('program', this.value)">
+                            <option value="all">All Programs</option>
+                            <option value="RTI - Math">RTI - Math</option>
+                            <option value="RTI - Reading">RTI - Reading</option>
+                            <option value="Credit Recovery">Credit Recovery</option>
+                            <option value="AP Chemistry Prep">AP Chemistry Prep</option>
+                            <option value="AP Statistics">AP Statistics</option>
+                            <option value="SAT Prep">SAT Prep</option>
+                            <option value="Reading Intervention">Reading Intervention</option>
+                            <option value="Exam Prep Lab">Exam Prep Lab</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Grade</label>
+                        <select class="filter-select" onchange="updateFilter('grade', this.value)">
+                            <option value="all">All Grades</option>
+                            <option value="9">9th Grade</option>
+                            <option value="10">10th Grade</option>
+                            <option value="11">11th Grade</option>
+                            <option value="12">12th Grade</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudentTable() {
+            const filteredStudents = getFilteredStudents();
+            
+            if (filteredStudents.length === 0) {
+                return '<div class="empty-state">No students match the current filters.</div>';
+            }
+
+            return `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Grade</th>
+                                <th>Risk Level</th>
+                                <th>Program</th>
+                                <th>Sessions</th>
+                                <th>Progress</th>
+                                <th>GPA</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${filteredStudents.map(student => `
+                                <tr>
+                                    <td><strong>${student.name}</strong></td>
+                                    <td>${student.grade}th</td>
+                                    <td><span class="${getRiskBadgeClass(student.risk_level)}">${student.risk_level}</span></td>
+                                    <td>${student.program}</td>
+                                    <td>${student.sessions_this_month}</td>
+                                    <td>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: ${student.progress}%"></div>
+                                        </div>
+                                        <span style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">${student.progress}%</span>
+                                    </td>
+                                    <td>${student.gpa.toFixed(1)}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-secondary" onclick="editStudent(${student.id})">Edit</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderSessionList() {
+            const recentSessions = appData.sessions.slice().reverse().slice(0, 5);
+            
+            return `
+                <div class="session-list">
+                    ${recentSessions.map(session => `
+                        <div class="session-item">
+                            <div class="session-header">
+                                <div class="session-info">
+                                    <div class="session-student">${session.student}</div>
+                                    <div class="session-tutor">with ${session.tutor}</div>
+                                </div>
+                                <div class="session-date">${formatDate(session.date)}</div>
+                            </div>
+                            <div class="session-details">
+                                <strong>${session.topic}</strong> • ${session.duration} min
+                            </div>
+                            <div class="understanding-indicator">
+                                ${Array(5).fill(0).map((_, i) => `
+                                    <div class="understanding-dot ${i < session.understanding_level ? 'filled' : ''}"></div>
+                                `).join('')}
+                            </div>
+                            <div class="session-details" style="margin-top: var(--space-8);">
+                                ${session.notes}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderTutorsDashboard() {
+            return `
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Tutors</h2>
+                        <button class="btn btn-primary" onclick="openModal('addTutorModal')">+ Add Tutor</button>
+                    </div>
+                    ${appData.tutors.map(tutor => `
+                        <div class="tutor-card">
+                            <div class="tutor-info">
+                                <div class="tutor-name">${tutor.name}</div>
+                                <div class="tutor-subject">${tutor.subject}</div>
+                            </div>
+                            <div class="tutor-stats">
+                                <div>${tutor.students_assigned} students assigned</div>
+                                <div>${tutor.hours_this_month} hours this month</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderReportsTab() {
+            return `
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Reports &amp; Analytics</h2>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-16);">
+                        <div class="stat-card" style="cursor: pointer;" onclick="generateReport('effectiveness')">
+                            <div class="stat-label">Program Effectiveness Report</div>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);">Sessions vs grade improvement correlation</p>
+                            <button class="btn btn-primary" style="margin-top: var(--space-16);">Generate Report</button>
+                        </div>
+                        <div class="stat-card" style="cursor: pointer;" onclick="generateReport('completion')">
+                            <div class="stat-label">Program Completion Report</div>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);">Student progress across all programs</p>
+                            <button class="btn btn-primary" style="margin-top: var(--space-16);">Generate Report</button>
+                        </div>
+                        <div class="stat-card" style="cursor: pointer;" onclick="generateReport('trending')">
+                            <div class="stat-label">Risk Level Trending</div>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);">Track changes in student risk levels</p>
+                            <button class="btn btn-primary" style="margin-top: var(--space-16);">Generate Report</button>
+                        </div>
+                        <div class="stat-card" style="cursor: pointer;" onclick="generateReport('tutor')">
+                            <div class="stat-label">Tutor Performance Report</div>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);">Compare tutor effectiveness metrics</p>
+                            <button class="btn btn-primary" style="margin-top: var(--space-16);">Generate Report</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTeacherView() {
+            const teacherStudents = appData.students.slice(0, 5);
+            const avgSessions = teacherStudents.reduce((sum, s) => sum + s.sessions_this_month, 0) / teacherStudents.length;
+            const interventionPercent = Math.round((teacherStudents.filter(s => s.program.includes('RTI')).length / teacherStudents.length) * 100);
+
+            return `
+                <div class="welcome-banner">
+                    <h1 class="welcome-title">Teacher Dashboard</h1>
+                    <p class="welcome-subtitle">Manage your class roster and track student progress</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Students in Your Class</div>
+                        <div class="stat-value">${teacherStudents.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Sessions per Student</div>
+                        <div class="stat-value">${avgSessions.toFixed(1)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">% in Intervention</div>
+                        <div class="stat-value">${interventionPercent}%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Top Struggling Topic</div>
+                        <div class="stat-value" style="font-size: var(--font-size-lg);">Algebra II</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Class Roster</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Grade</th>
+                                    <th>Risk Level</th>
+                                    <th>Program</th>
+                                    <th>Sessions</th>
+                                    <th>Progress</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${teacherStudents.map(student => `
+                                    <tr>
+                                        <td><strong>${student.name}</strong></td>
+                                        <td>${student.grade}th</td>
+                                        <td><span class="${getRiskBadgeClass(student.risk_level)}">${student.risk_level}</span></td>
+                                        <td>${student.program}</td>
+                                        <td>${student.sessions_this_month}</td>
+                                        <td>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: ${student.progress}%"></div>
+                                            </div>
+                                            <span style="font-size: var(--font-size-xs);">${student.progress}%</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary" onclick="editStudent(${student.id})">Edit</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTutorView() {
+            const todaysSessions = appData.students.slice(0, 3);
+            const totalHours = appData.tutors[0].hours_this_month;
+            const studentsHelped = appData.tutors[0].students_assigned;
+
+            return `
+                <div class="welcome-banner">
+                    <h1 class="welcome-title">Tutor Dashboard</h1>
+                    <p class="welcome-subtitle">Log sessions and track your impact</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Hours (This Month)</div>
+                        <div class="stat-value">${totalHours}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Students Helped</div>
+                        <div class="stat-value">${studentsHelped}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Sessions This Week</div>
+                        <div class="stat-value">8</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Understanding Level</div>
+                        <div class="stat-value">3.2</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Today's Sessions</h2>
+                        <button class="btn btn-primary" onclick="openModal('logSessionModal')">+ Log Session</button>
+                    </div>
+                    ${todaysSessions.map(student => `
+                        <div class="tutor-card" style="margin-bottom: var(--space-12);">
+                            <div class="tutor-info">
+                                <div class="tutor-name">${student.name}</div>
+                                <div class="tutor-subject">${student.program}</div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="openModal('logSessionModal')">Log Session</button>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Session Logs</h2>
+                    </div>
+                    ${renderSessionList()}
+                </div>
+            `;
+        }
+
+        function renderStudentView() {
+            const student = appData.students[0];
+            const modules = [
+                { title: "AP Chemistry: Equilibrium", desc: "Master Le Chatelier's Principle and equilibrium calculations", time: "45 min", progress: 60 },
+                { title: "AP Chemistry: Kinetics", desc: "Reaction rates, rate laws, and activation energy", time: "50 min", progress: 30 },
+                { title: "SAT Reading Strategies", desc: "Evidence-based reading and comprehension techniques", time: "40 min", progress: 0 },
+                { title: "Practice Test: Chemistry", desc: "Full-length practice test with detailed solutions", time: "90 min", progress: 0 }
+            ];
+
+            return `
+                <div class="welcome-banner">
+                    <h1 class="welcome-title">Welcome, ${student.name}</h1>
+                    <p class="welcome-subtitle">Your Exam Prep &amp; Tutoring Hub</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Your Program</div>
+                        <div class="stat-value" style="font-size: var(--font-size-xl);">${student.program}</div>
+                        <div class="progress-bar" style="margin-top: var(--space-12); width: 100%;">
+                            <div class="progress-fill" style="width: ${student.progress}%"></div>
+                        </div>
+                        <div style="font-size: var(--font-size-sm); margin-top: var(--space-8); color: var(--color-text-secondary);">${student.progress}% Complete</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Sessions This Month</div>
+                        <div class="stat-value">${student.sessions_this_month}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Current GPA</div>
+                        <div class="stat-value">${student.gpa.toFixed(1)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Study Streak</div>
+                        <div class="stat-value">7 days</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Next Tutoring Session</h2>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Tomorrow at 3:30 PM</strong> - AP Chemistry with Dr. Sarah Allen<br>
+                        <span style="font-size: var(--font-size-sm);">Topic: Chemical Equilibrium Review</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Available Practice Modules</h2>
+                    </div>
+                    <div class="module-grid">
+                        ${modules.map(module => `
+                            <div class="module-card">
+                                <h3 class="module-title">${module.title}</h3>
+                                <p class="module-desc">${module.desc}</p>
+                                <div class="module-meta">
+                                    <span>⏱ ${module.time}</span>
+                                    <span>${module.progress}% complete</span>
+                                </div>
+                                ${module.progress > 0 ? `
+                                    <div class="progress-bar" style="margin-bottom: var(--space-12); width: 100%;">
+                                        <div class="progress-fill" style="width: ${module.progress}%"></div>
+                                    </div>
+                                ` : ''}
+                                <button class="btn btn-primary" style="width: 100%;">${module.progress > 0 ? 'Continue' : 'Start'}</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Quiz Scores</h2>
+                    </div>
+                    <div style="display: flex; gap: var(--space-16); flex-wrap: wrap;">
+                        <div class="stat-card" style="flex: 1; min-width: 200px;">
+                            <div class="stat-label">Latest Score</div>
+                            <div class="stat-value">82%</div>
+                            <div class="stat-change positive">+8% from last attempt</div>
+                        </div>
+                        <div class="stat-card" style="flex: 1; min-width: 200px;">
+                            <div class="stat-label">Average Score</div>
+                            <div class="stat-value">76%</div>
+                            <div class="stat-change positive">Trending up</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSettingsTab() {
+            return `
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Settings</h2>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>School Branding</strong><br>
+                        Customize colors, logo, and white-label settings for your school district.
+                    </div>
+                    <div style="margin-top: var(--space-24);">
+                        <div class="form-group">
+                            <label class="form-label">School Name</label>
+                            <input type="text" class="form-control" value="${appData.school.name}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">District</label>
+                            <input type="text" class="form-control" value="${appData.school.district}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Primary Brand Color</label>
+                            <input type="color" class="form-control" value="${appData.school.color}" readonly style="height: 50px;">
+                        </div>
+                        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-16);">
+                            Note: Settings are read-only in this demo. Contact your administrator for changes.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper Functions
+        function getFilteredStudents() {
+            return appData.students.filter(student => {
+                if (appData.filters.riskLevel !== 'all' && student.risk_level !== appData.filters.riskLevel) return false;
+                if (appData.filters.program !== 'all' && student.program !== appData.filters.program) return false;
+                if (appData.filters.grade !== 'all' && student.grade.toString() !== appData.filters.grade) return false;
+                return true;
+            });
+        }
+
+        function calculateStats() {
+            const totalHours = appData.students.reduce((sum, s) => sum + s.sessions_this_month, 0);
+            const avgProgress = appData.students.reduce((sum, s) => sum + s.progress, 0) / appData.students.length;
+            
+            return {
+                totalStudents: appData.students.length,
+                totalHours: totalHours,
+                completionRate: Math.round(avgProgress),
+                gradeImprovement: 0.4
+            };
+        }
+
+        function updateFilter(filterType, value) {
+            appData.filters[filterType] = value;
+            renderApp();
+        }
+
+        function switchRole(role) {
+            appData.currentRole = role;
+            appData.currentTab = role === 'admin' ? 'dashboard' : null;
+            renderApp();
+        }
+
+        function switchTab(tab) {
+            appData.currentTab = tab;
+            renderApp();
+        }
+
+        function editStudent(id) {
+            const student = appData.students.find(s => s.id === id);
+            if (!student) return;
+
+            document.getElementById('editStudentId').value = student.id;
+            document.getElementById('editStudentName').value = student.name;
+            document.getElementById('editStudentGrade').value = student.grade;
+            document.getElementById('editStudentRisk').value = student.risk_level;
+            document.getElementById('editStudentProgram').value = student.program;
+            document.getElementById('editStudentGPA').value = student.gpa;
+
+            openModal('editStudentModal');
+        }
+
+        function generateReport(type) {
+            const reportNames = {
+                'effectiveness': 'Program Effectiveness Report',
+                'completion': 'Program Completion Report',
+                'trending': 'Risk Level Trending Report',
+                'tutor': 'Tutor Performance Report'
+            };
+            
+            alert(`Generating ${reportNames[type]}...\n\nThis report will be available for download as PDF in a production environment.`);
+        }
+
+        // Form Handlers
+        function handleAddStudent(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const newStudent = {
+                id: nextStudentId++,
+                name: formData.get('name'),
+                grade: parseInt(formData.get('grade')),
+                risk_level: formData.get('risk_level'),
+                program: formData.get('program'),
+                gpa: parseFloat(formData.get('gpa')),
+                sessions_this_month: 0,
+                progress: 0
+            };
+
+            appData.students.push(newStudent);
+            closeModal('addStudentModal');
+            renderApp();
+        }
+
+        function handleAddTutor(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const newTutor = {
+                id: nextTutorId++,
+                name: formData.get('name'),
+                subject: formData.get('subject'),
+                students_assigned: 0,
+                hours_this_month: 0
+            };
+
+            appData.tutors.push(newTutor);
+            closeModal('addTutorModal');
+            renderApp();
+        }
+
+        function handleLogSession(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const focusAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked'))
+                .map(cb => cb.value);
+
+            const newSession = {
+                id: nextSessionId++,
+                tutor: appData.tutors[0].name,
+                student: formData.get('student'),
+                date: formData.get('date'),
+                duration: parseInt(formData.get('duration')),
+                topic: formData.get('topic'),
+                understanding_level: parseInt(formData.get('understanding_level')),
+                notes: formData.get('notes'),
+                attendance: formData.get('attendance'),
+                focus_areas: focusAreas
+            };
+
+            appData.sessions.unshift(newSession);
+            
+            // Update student sessions count
+            const student = appData.students.find(s => s.name === newSession.student);
+            if (student) {
+                student.sessions_this_month++;
+            }
+
+            closeModal('logSessionModal');
+            
+            // Show success message
+            const mainContent = document.getElementById('mainContent');
+            const successAlert = document.createElement('div');
+            successAlert.className = 'alert alert-success';
+            successAlert.textContent = 'Session logged successfully!';
+            mainContent.insertBefore(successAlert, mainContent.firstChild);
+            
+            setTimeout(() => successAlert.remove(), 3000);
+            
+            renderApp();
+        }
+
+        function handleEditStudent(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const id = parseInt(formData.get('id'));
+            
+            const student = appData.students.find(s => s.id === id);
+            if (student) {
+                student.name = formData.get('name');
+                student.grade = parseInt(formData.get('grade'));
+                student.risk_level = formData.get('risk_level');
+                student.program = formData.get('program');
+                student.gpa = parseFloat(formData.get('gpa'));
+            }
+
+            closeModal('editStudentModal');
+            renderApp();
+        }
+
+        // Navigation
+        function renderNavigation() {
+            const navTabs = document.getElementById('navTabs');
+            
+            if (appData.currentRole === 'admin') {
+                navTabs.innerHTML = `
+                    <button class="nav-tab ${appData.currentTab === 'dashboard' ? 'active' : ''}" onclick="switchTab('dashboard')">Dashboard</button>
+                    <button class="nav-tab ${appData.currentTab === 'students' ? 'active' : ''}" onclick="switchTab('students')">Students</button>
+                    <button class="nav-tab ${appData.currentTab === 'tutors' ? 'active' : ''}" onclick="switchTab('tutors')">Tutors</button>
+                    <button class="nav-tab ${appData.currentTab === 'reports' ? 'active' : ''}" onclick="switchTab('reports')">Reports</button>
+                    <button class="nav-tab ${appData.currentTab === 'settings' ? 'active' : ''}" onclick="switchTab('settings')">Settings</button>
+                `;
+            } else {
+                navTabs.innerHTML = '';
+            }
+        }
+
+        function renderContent() {
+            const mainContent = document.getElementById('mainContent');
+            
+            if (appData.currentRole === 'admin') {
+                switch (appData.currentTab) {
+                    case 'students':
+                        mainContent.innerHTML = `
+                            <div class="section">
+                                <div class="section-header">
+                                    <h2 class="section-title">Student Roster</h2>
+                                    <button class="btn btn-primary" onclick="openModal('addStudentModal')">+ Add Student</button>
+                                </div>
+                                ${renderFilters()}
+                                ${renderStudentTable()}
+                            </div>
+                        `;
+                        break;
+                    case 'tutors':
+                        mainContent.innerHTML = renderTutorsDashboard();
+                        break;
+                    case 'reports':
+                        mainContent.innerHTML = renderReportsTab();
+                        break;
+                    case 'settings':
+                        mainContent.innerHTML = renderSettingsTab();
+                        break;
+                    default:
+                        mainContent.innerHTML = renderAdminDashboard();
+                }
+            } else if (appData.currentRole === 'teacher') {
+                mainContent.innerHTML = renderTeacherView();
+            } else if (appData.currentRole === 'tutor') {
+                mainContent.innerHTML = renderTutorView();
+            } else if (appData.currentRole === 'student') {
+                mainContent.innerHTML = renderStudentView();
+            }
+        }
+
+        function renderApp() {
+            renderNavigation();
+            renderContent();
+            populateStudentSelect();
+        }
+
+        function populateStudentSelect() {
+            const select = document.getElementById('sessionStudentSelect');
+            if (select) {
+                select.innerHTML = appData.students.map(s => 
+                    `<option value="${s.name}">${s.name}</option>`
+                ).join('');
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('roleSelector').addEventListener('change', (e) => {
+            switchRole(e.target.value);
+        });
+
+        // Rating scale interaction
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.rating-option')) {
+                const option = e.target.closest('.rating-option');
+                const value = option.dataset.value;
+                
+                document.querySelectorAll('.rating-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+                
+                document.getElementById('understandingLevelInput').value = value;
+            }
+        });
+
+        // Initialize app
+        renderApp();
+    </script>
+</body>
+</html>
