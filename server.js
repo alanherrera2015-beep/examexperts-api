@@ -41,8 +41,8 @@ const users = [
   {
     id: 3,
     email: "admin@examexperts.com",
-    password: "Password123!",
-    name: "Admin User",
+    password: "Mytime22!",
+    name: "Alan Herrera",
     role: "Admin",
     totalUsers: 15,
     createdAt: "2024-07-01"
