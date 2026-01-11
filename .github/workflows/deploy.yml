@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy to Google Cloud Run
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -22,18 +22,18 @@ jobs:
     - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v1
       with:
-        project_id: tranquil-garage-479203-v1  # Set your project ID here
+        project_id: tranquil-garage-479203-v1
         export_default_credentials: true
 
     - name: Build and Push Docker Image
       run: |
         gcloud builds submit \
-          --tag gcr.io/${{ secrets.GCP_PROJECT }}/my-app
+          --tag us-central1-docker.pkg.dev/tranquil-garage-479203-v1/my-app-repo/my-app
 
     - name: Deploy to Cloud Run
       run: |
         gcloud run deploy my-app \
-          --image gcr.io/${{ secrets.GCP_PROJECT }}/my-app \
-          --platform managed \
+          --image us-central1-docker.pkg.dev/tranquil-garage-479203-v1/my-app-repo/my-app \
           --region us-central1 \
+          --platform managed \
           --allow-unauthenticated
