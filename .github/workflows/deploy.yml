@@ -3,34 +3,37 @@ name: Deploy to Google Cloud Run
 on:
   push:
     branches:
-      - main  # Deploy whenever changes are pushed to main
+      - main
 
 jobs:
   deploy:
-    name: Build and Deploy
+    name: Build and Deploy to Google Cloud Run
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Cloud SDK
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_KEY }}
+
+    - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v1
       with:
+        project_id: tranquil-garage-479203-v1  # Set your project ID here
         export_default_credentials: true
-        project_id: ${{ secrets.GCP_PROJECT }}
-        region: ${{ secrets.GCP_REGION }}
-        service_account_key: ${{ secrets.GCP_KEY }}
 
     - name: Build and Push Docker Image
       run: |
         gcloud builds submit \
-          --tag gcr.io/${{ secrets.GCP_PROJECT }}/examexperts-api
+          --tag gcr.io/${{ secrets.GCP_PROJECT }}/my-app
 
     - name: Deploy to Cloud Run
       run: |
-        gcloud run deploy examexperts-api \
-          --image gcr.io/${{ secrets.GCP_PROJECT }}/examexperts-api \
+        gcloud run deploy my-app \
+          --image gcr.io/${{ secrets.GCP_PROJECT }}/my-app \
           --platform managed \
-          --region ${{ secrets.GCP_REGION }} \
+          --region us-central1 \
           --allow-unauthenticated
