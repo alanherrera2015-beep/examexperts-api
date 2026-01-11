@@ -28,12 +28,12 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         gcloud builds submit \
-          --tag us-central1-docker.pkg.dev/tranquil-garage-479203-v1/my-app-repo/my-app
+          --tag us-central1-docker.pkg.dev/tranquil-garage-479203-v1/examexperts-repo/my-app
 
     - name: Deploy to Cloud Run
       run: |
         gcloud run deploy my-app \
-          --image us-central1-docker.pkg.dev/tranquil-garage-479203-v1/my-app-repo/my-app \
+          --image us-central1-docker.pkg.dev/tranquil-garage-479203-v1/examexperts-repo/my-app \
           --region us-central1 \
           --platform managed \
           --allow-unauthenticated
