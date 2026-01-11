@@ -23,7 +23,6 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: tranquil-garage-479203-v1
-        export_default_credentials: true
 
     - name: Build and Push Docker Image
       run: |
